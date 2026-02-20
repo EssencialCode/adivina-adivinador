@@ -1,0 +1,23 @@
+name: Compilar Proyecto C++
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Instalar dependencias
+      run: sudo apt-get update && sudo apt-get install -y build-essential
+
+    - name: Compilar con g++
+      run: g++ -o adivina-adivinador main.cpp GeneraCodigos.cpp Interprete.cpp Verificador.cpp
+
+    - name: Verificar ejecutable
+      run: ls -la adivina-adivinador
